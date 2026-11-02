@@ -1,0 +1,35 @@
+name: CI
+
+# Fast static checks on every PR and push (Linux runner).
+# VBA cannot be compiled or run here (it needs Access/Excel/Word), so this only covers
+# what can be found by reading the source. See scripts/check.sh.
+
+on:
+  push:
+    branches:
+      - main
+      - prototype
+  pull_request:
+    branches:
+      - main
+      - prototype
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  static-checks:
+    name: static-checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Static VBA checks
+        run: sh scripts/check.sh

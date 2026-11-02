@@ -1,0 +1,17 @@
+# Office temp and lock files
+~$*
+*.laccdb
+*.ldb
+.DS_Store
+*.log
+
+# This repo holds exported VBA source only. Host files can contain client data and this repo is public.
+# If you really need one in the repo: git add -f <file>
+*.accdb
+*.accde
+*.mdb
+*.xlsm
+*.xlsb
+*.xlam
+*.docm
+*.dotm
