@@ -10,5 +10,6 @@ Work happens on the `prototype` branch; `main` only receives reviewed, CI-green 
 
 - Enable the pre-push hook once per clone: `git config core.hooksPath .githooks` (see [.githooks/README.md](.githooks/README.md))
 - Static checks: `sh scripts/check.sh` (the same script CI runs). It cannot compile VBA, so also import the changed files and run **Debug > Compile** in the host application
+- Using the library in your own project: [INSTALL.md](INSTALL.md)
 - Planned work: [ROADMAP.md](ROADMAP.md)
 - Conventions for contributors and AI agents: [.github/copilot-instructions.md](.github/copilot-instructions.md); review criteria: [REVIEW.md](REVIEW.md); incident log: [INCIDENTS.md](INCIDENTS.md)
