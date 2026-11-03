@@ -29,9 +29,9 @@ Attribute VB_Exposed = False
 ' Revision History
 '
 '   Date    Who     Reason
+' 03Nov26   Claude  Host-neutral: dropped Option Compare Database; Access-only code under #If InAccess.
 ' 06Dec05   PON     Initial coding.
 '
-Option Compare Database
 Option Explicit             ' Declare EVERYTHING!
 '
 ' Public Class Level Constants
@@ -75,8 +75,9 @@ Option Explicit             ' Declare EVERYTHING!
 ' 06Dec05   PON     Initial coding.
 '
 Public Function handleAssertion(ByVal message As String) As Long
-    ' Show it to the user (MDBs only)
     Dim iResponse As Integer
+#If InAccess Then
+    ' Show it to the user (MDBs only)
     If StrComp(Right(CurrentDb.Name, 4), ".mdb", vbTextCompare) = 0 Then
         ' Open database - assert now
         If MsgBox(message & vbCrLf & vbCrLf & "Do you wish to debug it now?", _
@@ -93,6 +94,15 @@ Public Function handleAssertion(ByVal message As String) As Long
         ' Unknown database type - ignore it
         iResponse = Assert.assertionContinue
     End If
+#Else
+    ' Not Access (Excel/Word): always offer to debug
+    If MsgBox(message & vbCrLf & vbCrLf & "Do you wish to debug it now?", _
+              vbYesNo + vbQuestion) = vbYes Then
+        iResponse = Assert.assertionStop
+    Else
+        iResponse = Assert.assertionContinue
+    End If
+#End If
     
     handleAssertion = iResponse
 End Function

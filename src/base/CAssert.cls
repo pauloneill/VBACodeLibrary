@@ -8,8 +8,8 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 ' 06Dec05   PON     Added assertionHandlers property and code to use it.
+' 03Nov26   Claude  Host-neutral: dropped Option Compare Database (Access-only); Access code stays under #If InAccess.
 
-Option Compare Database
 Option Explicit
 
 Private Enum assertionResponse

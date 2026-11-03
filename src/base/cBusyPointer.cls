@@ -34,9 +34,9 @@ Attribute VB_Exposed = False
 ' Revision History
 '
 '   Date    Who     Reason
+' 03Nov26   Claude  Host-neutral: dropped Option Compare Database; busy pointer per host (InAccess/InExcel/InWord).
 ' 20May98   PON     Initial coding.
 '
-Option Compare Database     ' Use database order for string comparisons
 Option Explicit             ' Declare EVERYTHING!
 Option Base 1               ' Arrays start at 1
 '
@@ -81,7 +81,14 @@ Option Base 1               ' Arrays start at 1
 ' 20May98   PON     Initial coding.
 '
 Public Sub Show()
+#If InAccess Then
     DoCmd.hourGlass True
+#ElseIf InExcel Then
+    Application.Cursor = xlWait
+#ElseIf InWord Then
+    System.Cursor = wdCursorWait
+#End If
+    ' (no conditional compilation constant set: nothing to show)
 End Sub
 
 '
@@ -108,5 +115,11 @@ End Sub
 ' 20May98   PON     Initial coding.
 '
 Private Sub Class_Terminate()
+#If InAccess Then
     DoCmd.hourGlass False
+#ElseIf InExcel Then
+    Application.Cursor = xlDefault
+#ElseIf InWord Then
+    System.Cursor = wdCursorNormal
+#End If
 End Sub

@@ -14,6 +14,7 @@
 ## Conventions
 - Every module and class starts with `Option Explicit`. Keep the existing header block (copyright, author, change log) intact. Add a change-log line in the existing style (date, initials, what changed) when changing a file.
 - Keep the `Attribute VB_Name` equal to the file name. Do not change other `Attribute` lines (`VB_PredeclaredId`, `VB_Exposed`, `VB_GlobalNameSpace`) without asking: they change how the component is instantiated.
+- Host-specific code (`CurrentDb`, `DoCmd`, `Application.Cursor`, `System.Cursor`) goes inside `#If InAccess` / `#If InExcel` / `#If InWord`, with a host-neutral `#Else` where possible. Do not add `Option Compare Database` (Access-only); use explicit `vbTextCompare`/`vbBinaryCompare`.
 - Prefer built-in VBA and the object model of the host. Late-bind (`CreateObject`) rather than adding a reference, and say so in the README.
 - API `Declare` statements must be `PtrSafe` and use `LongPtr` for handles and pointers, with `#If VBA7` / `Win64` guards where older Office matters.
 - Handle errors deliberately: `On Error GoTo` with a handler that cleans up. Use `On Error Resume Next` only around one statement, then restore with `On Error GoTo 0`. Never swallow an error silently.

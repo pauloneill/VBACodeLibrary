@@ -29,9 +29,9 @@ Attribute VB_Exposed = False
 ' Revision History
 '
 '   Date    Who     Reason
+' 03Nov26   Claude  Host-neutral: dropped Option Compare Database; Access-only code under #If InAccess.
 ' 06Dec05   PON     Initial coding.
 '
-Option Compare Database
 Option Explicit             ' Declare EVERYTHING!
 
 Implements cAssertHandler

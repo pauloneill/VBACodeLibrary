@@ -13,6 +13,18 @@ Import all the classes into your project and then copy the contents of Global.ba
 ### Prerequisites
 
 *(none)*
+
+### Host applications and conditional compilation
+
+The classes compile in Access, Excel and Word. Host-specific code sits behind conditional compilation constants, which you set **per project** in *Tools > Project Properties > Conditional Compilation Arguments* (they do not travel with imported files):
+
+| Constant | Set it in | Effect |
+|----------|-----------|--------|
+| `InAccess = 1` | Access projects | `cAssertHandler` and `CAssert` use `CurrentDb` to tell open (`.mdb`) from compiled (`.mde`) databases; `cBusyPointer` uses `DoCmd.HourGlass` |
+| `InExcel = 1` | Excel projects | `cBusyPointer` uses `Application.Cursor` |
+| `InWord = 1` | Word projects | `cBusyPointer` uses `System.Cursor` |
+
+Set several at once as `InAccess = 1 : InExcel = 0`. With none set the code is host-neutral: assertions always offer to debug via a message box, and `cBusyPointer` does nothing.
 <!--
 ### Installing
 

@@ -22,13 +22,13 @@ Attribute VB_Name = "Globals"
 ' 12Mar11   PON     Removed global Internet object.
 ' 10Nov04   PON     Removed constant "errCancelled" - already in modUserInput.
 ' 30Aug04   PON     Added global Internet object.
+' 03Nov26   Claude  Host-neutral: dropped Option Compare Database (Access-only).
 ' 17Aug04   PON     Added global goLogger.
 ' 19Jul04   PON     Added global Desktop variable.
 ' 30Apr03   PON     Added constant "errCancelled".
 ' 01Nov02   PON/BVV Added constants for set names and source names.
 ' 13Sep02   PON     Initial coding.
 '
-Option Compare Database
 Option Explicit             ' Declare EVERYTHING!
 
 ' Public Class Level Constants
