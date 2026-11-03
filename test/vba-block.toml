@@ -1,0 +1,16 @@
+# vba-block.toml for the test workbook. A project builds an Office document, a package does not.
+# Add each library module under [dependencies] as it is worked through. Not yet run through `vba build`.
+
+[project]
+name = "vba-code-library-test"
+target = "xlsm"
+
+[src]
+TestBase = "src/TestBase.bas"
+
+[dependencies]
+vba-code-library-base = { path = "../src/base" }
+
+# System libraries the tests need (none yet).
+# [references]
+# Scripting = { version = "1.0", guid = "{420B2830-E718-11CF-893D-00A0C9054228}" }

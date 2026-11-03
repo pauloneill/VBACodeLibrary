@@ -1,47 +1,19 @@
-# vba-block.toml: manifest for vba-blocks (https://www.vba-blocks.com/)
-# First pass. Only the fields confirmed in the vba-blocks docs are active; the rest are commented.
-# Not yet run through `vba build`: see the notes in the reply that came with this file.
+# vba-block.toml: aggregate manifest. Depends on every library module, so a consumer can
+# pull in the whole library with one dependency. Each module has its own manifest in
+# src/<module>/vba-block.toml and lists the other modules it needs. Add a line here as each
+# module gets its manifest.
+#
+# Unverified: whether vba-blocks accepts a package that has only [dependencies] and no [src].
+# If it does not, delete this file and depend on the modules directly.
 
 [package]
 name = "vba-code-library"
 version = "0.1.0"
 authors = ["Paul O'Neill"]
-# license = "MIT"          # unconfirmed field: check against the vba-blocks docs before enabling
-# description = "Reusable Microsoft Access and Word/Excel VBA classes and modules"
 
-# --- Source components: <component name> = "<path>" ---------------------------------------
-# Each key becomes the module/class name in the target project. Keep keys equal to the
-# `Attribute VB_Name` in the file (scripts/check.sh already enforces VB_Name == file name).
-[src]
-# base: Design-by-Contract assertions (see src/base/README.md)
-CAssert = "src/base/CAssert.cls"
-cAssertHandler = "src/base/cAssertHandler.cls"
-cSilentAssertionHandler = "src/base/cSilentAssertionHandler.cls"
-cBusyPointer = "src/base/cBusyPointer.cls"
-Globals = "src/base/Globals.bas"
+[dependencies]
+vba-code-library-base = { path = "src/base" }
 
-# --- Dependencies ---------------------------------------------------------------------------
-# None today. Add other packages here when components start to depend on them, e.g.
-# [dependencies]
-# dictionary = "^1"
-
-# --- References -----------------------------------------------------------------------------
-# None today (the library late-binds). Declare any type-library reference here, e.g.
-# [references]
-# Scripting = { version = "1.0", guid = "{420B2830-E718-11CF-893D-00A0C9054228}" }
-
-# --- Building a host document for testing (a package cannot also be a project) ---------------
-# To compile and exercise this library in a host app, use a separate project manifest, e.g.
-# in tests/host/vba-block.toml:
-#
-#   [project]
-#   name = "vba-code-library-host"
-#   target = "xlsm"                 # see note: Access (accdb) support is unverified
-#
-#   [dependencies]
-#   vba-code-library = { path = "../.." }
-#
-# Consumers can depend on this repo straight from git:
-#
-#   [dependencies]
-#   vba-code-library = { git = "https://github.com/pauloneill/VBACodeLibrary" }
+# Consumers can depend on a single module straight from git, e.g.:
+# vba-code-library-base = { git = "https://github.com/pauloneill/VBACodeLibrary" }
+# (a git dependency would need to locate the module inside the repo: unverified)

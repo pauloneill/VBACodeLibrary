@@ -11,7 +11,7 @@ cd "$root" || exit 1
 fail=0
 err() { echo "FAIL: $1"; fail=1; }
 
-files=$(find src -type f \( -name '*.bas' -o -name '*.cls' -o -name '*.frm' \) | sort)
+files=$(find src test -type f \( -name '*.bas' -o -name '*.cls' -o -name '*.frm' \) | sort)
 [ -z "$files" ] && { echo "check: no VBA source files found under src/"; exit 0; }
 
 for f in $files; do
@@ -42,7 +42,7 @@ for f in $files; do
 done
 
 # 7. No host files or lock files committed
-bad=$(git ls-files 2>/dev/null | grep -Ei '\.(accdb|accde|mdb|xlsm|xlsb|xlam|docm|dotm|laccdb|ldb)$|(^|/)~\$')
+bad=$(git ls-files 2>/dev/null | grep -Ev '^test/[^/]*\.xlsm$' | grep -Ei '\.(accdb|accde|mdb|xlsm|xlsb|xlam|docm|dotm|laccdb|ldb)$|(^|/)~\$')
 [ -n "$bad" ] && err "host or lock file committed: $bad"
 
 if [ "$fail" -eq 0 ]; then echo "check: all static checks passed ($(echo "$files" | wc -l | tr -d ' ') files)."; fi

@@ -15,3 +15,5 @@
 *.xlam
 *.docm
 *.dotm
+# ...except the Excel test workbook in test/ (see test/README.md)
+!test/*.xlsm

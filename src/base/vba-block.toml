@@ -1,0 +1,23 @@
+# vba-block.toml for the `base` module (assertions, busy pointer, global Assert object).
+# Paths are relative to this file. `base` depends on no other module, only system libraries.
+# Not yet run through `vba build`.
+
+[package]
+name = "vba-code-library-base"
+version = "0.1.0"
+authors = ["Paul O'Neill"]
+
+[src]
+CAssert = "CAssert.cls"
+cAssertHandler = "cAssertHandler.cls"
+cSilentAssertionHandler = "cSilentAssertionHandler.cls"
+cBusyPointer = "cBusyPointer.cls"
+Globals = "Globals.bas"
+
+# Other library modules: none.
+# [dependencies]
+
+# System libraries (type-library references): none today, the code late-binds.
+# Add one here if a component ever needs it, e.g. the Scripting Runtime:
+# [references]
+# Scripting = { version = "1.0", guid = "{420B2830-E718-11CF-893D-00A0C9054228}" }
