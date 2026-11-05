@@ -4,7 +4,7 @@ Ideas and planned work, roughly in priority order. Move an item to `README.md` o
 
 ## Planned
 
-- **vba-blocks manifest**: load all components through `vba-block.toml`. First pass exists; still to do is a real `vba build`, confirming whether an Access (`accdb`) target is supported, and a separate `[project]` manifest for a test host.
+- **vba-blocks manifest**: load all components through `vba-block.toml`. First pass exists; still to do is a real `vba build`. vba-blocks does **not** support an Access (`accdb`) target (confirmed by testing), so manifests can build Excel (`xlsm`) test hosts but not an Access one; the Word target is untested. Access projects import the files by hand (see `INSTALL.md`).
 - **Fix `.accdb` / `.accde` handling in the assert classes**: `CAssert` and `cAssertHandler` only recognise `.mdb` and `.mde`, so assertions are silently ignored in modern Access files.
 
 - **Per-module manifests**: each module under `src/` gets its own `vba-block.toml` listing the other modules it depends on; `base` is done, the rest follow as they are worked through. The root `vba-block.toml` aggregates them.

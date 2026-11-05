@@ -52,4 +52,4 @@ Then fire an assertion: `Assert.Assert False, "install check"`. You should get a
 
 - The constants are per project and do not travel when you import files or copy a database. A new project needs step 2 again.
 - In Access, `CAssert` and `cAssertHandler` only recognise `.mdb` and `.mde` files. Assertions are ignored in `.accdb` / `.accde` databases (tracked in [ROADMAP.md](ROADMAP.md)).
-- Whether the [vba-blocks](https://www.vba-blocks.com/) manifest (`vba-block.toml`) can set these arguments for a built project has not been verified.
+- [vba-blocks](https://www.vba-blocks.com/) (`vba-block.toml`) cannot build an Access (`accdb`) project, so for Access you import the files by hand as above. Whether it can set these arguments for an Excel build has not been verified.

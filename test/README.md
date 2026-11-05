@@ -1,6 +1,6 @@
 # Test workbook
 
-An Excel workbook (`.xlsm`) used to compile and exercise the library modules. VBA cannot be compiled outside Office, so this is where the "compile and run in the host application" step from `REVIEW.md` happens for Excel. (Access-only behaviour, such as `.mdb` handling, still needs an Access test database.)
+An Excel workbook (`.xlsm`) used to compile and exercise the library modules. VBA cannot be compiled outside Office, so this is where the "compile and run in the host application" step from `REVIEW.md` happens for Excel. (Access-only behaviour, such as `.mdb` handling, needs an Access test database, assembled by hand: vba-blocks does not support an `accdb` target.)
 
 ## Contents
 
